@@ -1,0 +1,67 @@
+import Vue from 'vue'
+import VueRouter, { RouteConfig } from 'vue-router'
+import Home from '../views/Home.vue'
+import Event from '../views/Event.vue'
+import UpdateEvent from '../views/UpdateEvent.vue'
+
+Vue.use(VueRouter)
+
+const routes: Array<RouteConfig> = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/about',
+    name: 'About',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/Login.vue')
+  },
+  {
+    path: '/signup',
+    name: 'Signup',
+    component: () => import('../views/Signup.vue')
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('../views/Profile.vue')
+  },
+  {
+    path: '/allEvents',
+    name: 'AllEvents',
+    component: () => import('../views/allEvents.vue')
+  },
+  {
+    path: '/event/:id',
+    name: 'EventPage',
+    component: Event
+  },
+  {
+    path: '/createEvent',
+    name: 'CreateEventPage',
+    component: () => import('../views/CreateEvent.vue')
+  },
+  {
+    path: '/updateEvent/:id',
+    name: 'EventPage',
+    component: UpdateEvent
+  }
+
+]
+
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
+})
+
+export default router
