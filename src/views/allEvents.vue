@@ -5,12 +5,12 @@
                 <b-input-group-prepend is-text>
                     <b-icon icon="search"></b-icon>
                 </b-input-group-prepend>
-                <b-form-input type="text" v-model="searchInput"></b-form-input>
+                <b-form-input type="text" v-model="searchInput" placeholder="Zadajte názov podujatia, ktoré hladáte"></b-form-input>
             </b-input-group>
             <b-button v-if="isLogged" class="col-4" to="/createEvent" variant="primary">Pridať udalosť</b-button>
         </div>
         <div class="row">
-            <div class="col-3" v-for="event in filteredEvents" :key="event.event">
+            <div class="col-lg-3" v-for="event in filteredEvents" :key="event.event">
                 <Card :event="event"/>
             </div>
             <div class="col" v-if="checkIfEmpty">
@@ -68,7 +68,7 @@ import Card from '@/components/Card.vue'
     },
     
     checkIfEmpty: function(){
-        if(this.filteredEvents == 0){
+        if(this.$data.filteredEvents == 0){
             return true;
         }
         else{

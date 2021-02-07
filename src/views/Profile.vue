@@ -16,8 +16,23 @@
     <div class="row">
       <b-button class="col-4" to="/createEvent" variant="primary">Pridať udalosť</b-button>
     </div>
-    <div class="row">
+    <b-row>
+      <b-col class="profileMenu">
+        <h2 class="profileMenuItem hover hover-3" v-bind:class="{active: viewMyEvents}"
+        v-on:click="viewMyEvents=true">Moje udalosti</h2>
+      </b-col>
+      <b-col class="profileMenu">
+        <h2 class="profileMenuItem hover hover-3" v-bind:class="{active: !viewMyEvents}"
+        v-on:click="viewMyEvents=false">Sledované udalosti</h2>
+      </b-col>
+    </b-row>
+    <div class="row" v-if="viewMyEvents">
       <div class="col-3" v-for="event in events" :key="event.event">
+        <ProfileCard class="Card" :event="event"/>
+      </div>
+    </div>
+    <div class="row" v-if="!viewMyEvents">
+      <div class="col-3" v-for="event in followedEvents" :key="event.event">
         <Card class="Card" :event="event"/>
       </div>
     </div>
@@ -26,18 +41,22 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator'
 import axios from 'axios'
-import Card from '@/components/ProfileCard.vue';
+import ProfileCard from '@/components/ProfileCard.vue';
+import Card from '@/components/FollowedCard.vue';
 
 @Component({
     components: {
+        ProfileCard,
         Card,
     },
     data: function() {
         return {
             events: [],
+            followedEvents: null,
             userName: '',
             userEmail: '',
-            registeredTime: ''
+            registeredTime: '',
+            viewMyEvents: true
         }
     },
     mounted() {
@@ -67,11 +86,92 @@ import Card from '@/components/ProfileCard.vue';
           this.$store.commit('setLoggedFalse');          
           this.$router.push("/");
         });
+      axios
+      .get('http://localhost:8000/following/'+this.$store.getters.getUserId, {headers: {
+          Authorization: `Bearer ${this.$store.getters.getToken}`
+      }})
+      .then(response => {
+          this.$data.followedEvents = response.data;
+          console.log(this.$data.followedEvents);
+      })
+      .catch(e => {
+          alert(e);
+      })
   }
 })
 
 export default class Profile extends Vue {}
 </script>
 <style lang="scss" scoped>
+  $animate: all 0.2s ease-in-out;
 
+  .profileMenuItem{
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .profileMenuItem .acitve{
+    color: #298cf0;
+  }
+  .profileMenu{
+    margin: 20px 0;
+    .hover {
+      transition: $animate;
+      position: relative;
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        width: 0px;
+        height: 5px;
+        margin: 5px 0 0;
+        transition: $animate;
+        transition-duration: 0.75s;
+        opacity: 0;
+        background-color: #298cf0;
+      }
+      &.hover-3 {
+        &:before {
+          left: 50%;
+        }
+        &:after {
+          right: 50%;
+        }
+      }
+    }
+    &:hover {
+      cursor: pointer;
+      .hover {
+        &:before,
+        &:after {
+          width: 100%;
+          opacity: 1;
+        }
+        &.hover-3{
+          &:before,
+          &:after {
+            width: 50%;
+          }
+        }
+      }
+    }
+    .active {
+      cursor: pointer;
+      color: #298cf0;
+      &.hover {
+        &:before,
+        &:after {
+          width: 100%;
+          opacity: 1;
+        }
+        &.hover-3{
+          &:before,
+          &:after {
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
 </style>

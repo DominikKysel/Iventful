@@ -3,7 +3,7 @@
     <div id="nav">
       <div id="headerNav">
         <b-navbar  toggleable="lg" type="light" variant="light" fixed="top">
-          <b-navbar-brand to="/">Eventful</b-navbar-brand>
+          <b-navbar-brand to="/">Iventful</b-navbar-brand>
 
           <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -40,14 +40,14 @@
     </div>
     <router-view/>
     <div>
-      <b-navbar id="bottomNavbar" class="container justify-content-md-center" toggleable="sm" type="light" variant="light" sticky-bottom>
-          <b-navbar-nav class="col align-self-center">
-            <b-nav-text>Eventful - 2021 all rights reserved &copy;</b-nav-text>
+      <b-navbar id="bottomNavbar" class="container align-content-center" fixed="bottom" toggleable="sm" type="light" variant="light">
+          <b-navbar-nav class="col leftCol">
+            <b-nav-text>Iventful - 2021 all rights reserved &copy;</b-nav-text>
           </b-navbar-nav>
-          <b-navbar-nav class="col align-self-center">
+          <b-navbar-nav class="col middleCol align-self-center">
             <b-nav-text>Made by Dominik Kysel</b-nav-text>
           </b-navbar-nav>
-          <b-navbar-nav class="col align-self-center">
+          <b-navbar-nav class="col rightCol">
             <b-nav-text>Contact: kysel.dominik@gmail.com <br>
                         Phone: 9852 458 486</b-nav-text>
           </b-navbar-nav>
@@ -71,7 +71,7 @@ export default Vue.extend({
       }
   },
   methods: {
-    logout(getToken) {
+    logout(getToken: string) {
       this.$store.dispatch('logout',{
         type: 'logout',
         token: getToken
@@ -96,5 +96,20 @@ export default Vue.extend({
         color: #298cf0;
       }
     }
+  }
+  #bottomNavbar.bg-light{
+    background-color: #fff !important;
+  }
+  .leftCol{
+    text-align: left;
+  }
+  .middleCol{
+    text-align: center;
+  }
+  .rightCol{
+    text-align: right;
+  }
+  .navbar-text{
+    margin: 0 auto;
   }
 </style>

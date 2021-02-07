@@ -1,7 +1,7 @@
 <template>
   <div class="about container justify-content-md-center">
     <h1>O nás</h1>
-    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi hic quidem maiores tempore numquam sunt nulla et sint obcaecati rerum. Vitae officiis in quibusdam quis harum quaerat, veniam animi possimus.</p>
+    <p>Iventful je miesto na ktorom nájdete podujatia od obyčajných ľudí, alebo väčších organizátorov. Na tom kto podujatie organizuje nezáleží, záleží iba na tom, čo vás zaujíma.</p>
   </div>
 </template>
 <style lang="scss" scoped>

@@ -2,8 +2,8 @@
   <div class="home container justify-content-md-center">
     <div class="row">
       <div class="col mainCols">
-        <h1>Eventful</h1>
-        <p>Eventful je miesto, na ktorom môžete nájsť podujatia rôznych typov.
+        <h1>Iventful</h1>
+        <p>Iventful je miesto, na ktorom môžete nájsť podujatia rôznych typov.
           Či už sa jedná hudobné festivali, výstavi technologických noviniek alebo neorganizované stretnutia, tu ich môžete nájsť.
           Ako som spomenul budú tu neorganizované stretnutia, to znamená, že hocikto môže založiť udalosť, ktorú ľudia uvidia a môžu dôjsť.
           Ak ste organizátor môžete požiadať o overenie a po overení, budú vaše podujatia kategorizované ako oficiálne.

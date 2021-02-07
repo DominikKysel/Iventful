@@ -72,14 +72,19 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
-import { event } from 'jquery';
 
 export default Vue.extend({
    data: function(){
         return {
             url: null,
             eventId: this.$route.params.id,
-            event: null
+            event: {
+                "name": '',
+                "address": '',
+                "date_start": '',
+                "date_end": '',
+                "description": ''
+            }
         }
     },
     methods: {

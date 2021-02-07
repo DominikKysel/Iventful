@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-modal ref="my-modal" hide-footer title="Pozor! Táto akcia sa nedá zvrátiť">
+        <b-modal id="my-modal" hide-footer title="Pozor! Táto akcia sa nedá zvrátiť">
             <div class="d-block text-center">
                 <h3>Ste si istý, že chcete toto podujatie vymazať?</h3>
             </div>
@@ -50,13 +50,14 @@ import axios from 'axios';
 @Component
 export default class Card extends Vue {
     @Prop() private event!: object;
+
     private hideModal(){
-        this.$refs['my-modal'].hide()
+        this.$bvModal.hide("my-modal");
     }
     private showModal() {
-        this.$refs['my-modal'].show()
+        this.$bvModal.show("my-modal");
     }
-    private deleteEvent(id){
+    private deleteEvent(id: string){
         const token = this.$store.getters.getToken;
         axios
         .delete(`http://localhost:8000/event/${id}`, { headers: {

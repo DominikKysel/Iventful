@@ -7,10 +7,10 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-        userName: 'Používateľ',
-        isLogged: false,
-        userToken: '',
-        userId: ''
+        userName: (localStorage.getItem('userName')===null) ?  'Používateľ' : localStorage.getItem('userName'),
+        isLogged: (localStorage.getItem('isLogged')===null || localStorage.getItem('isLogged')=="false") ?  false : true,
+        userToken: (localStorage.getItem('userToken')===null) ?  '' : localStorage.getItem('userToken'),
+        userId: (localStorage.getItem('userId')===null) ?  '' : localStorage.getItem('userId')
     },
     getters: {
         isLogged(state) {
@@ -29,18 +29,23 @@ const store = new Vuex.Store({
     mutations: {
         setLoggedTrue(state) {
             state.isLogged = true;
+            localStorage.setItem('isLogged', "true");
         },
         setLoggedFalse(state) {
             state.isLogged = false;
+            localStorage.setItem('isLogged', "false");
         },
         setToken(state, token: string) {
             state.userToken = token;
+            localStorage.setItem('userToken', state.userToken);
         },
         setUserName(state, name: string) {
             state.userName = name;
+            localStorage.setItem('userName', state.userName);
         },
         setUserId(state, id: string) {
             state.userId = id;
+            localStorage.setItem('userId', state.userId);
         }
     },
     actions: {
@@ -98,8 +103,11 @@ const store = new Vuex.Store({
                     router.push("/");
                 } 
             )
-            .catch(e => {
-                alert(e);
+            .catch(() => {
+                context.commit('setToken', '');
+                context.commit('setUserName', 'Používateľ');
+                context.commit('setUserId', '');
+                context.commit('setLoggedFalse');
                 router.push("/");
             })
         },
@@ -113,7 +121,7 @@ const store = new Vuex.Store({
                         Authorization: `Bearer ${token}`
                         }
             })
-            .then(response => {
+            .then(() => {
                 alert('Podujate bolo úspešne pridané');
             })
             .catch(e =>{

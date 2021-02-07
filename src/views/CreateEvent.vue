@@ -96,7 +96,7 @@ import axios from 'axios'
 export default Vue.extend({
     data: function(){
         return {
-            url: null,
+            url: '',
             eventName: "",
             eventPoster: null,
             eventAddress: "",
@@ -118,7 +118,7 @@ export default Vue.extend({
             const dateStart = this.$data.eventStartDate;
             const dateEnd = this.$data.eventEndDate;
             const description = this.$data.eventDescription;
-            function sendEventData(event){
+            function sendEventData(event: object){
                 axios
                 .post('http://localhost:8000/event',event,
                 {
@@ -126,7 +126,7 @@ export default Vue.extend({
                             Authorization: `Bearer ${token}`
                             }
                 })
-                .then(response => {
+                .then(() => {
                     alert('Podujate bolo úspešne pridané');
                 })
                 .catch(e =>{
@@ -159,8 +159,7 @@ export default Vue.extend({
             },
             reader.readAsDataURL(file);  
         },
-
-        onFileChange(e) {
+        onFileChange(e){
             const file = e.target.files[0];
             this.url = URL.createObjectURL(file);
         }
