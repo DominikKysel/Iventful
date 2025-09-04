@@ -1,2 +1,2 @@
-# eventful
- Menší projekt na overenie vedomostí
+# Eventful
+Final exam project for secondary school
